@@ -168,6 +168,19 @@ SPACE_MISSIONS = [
 ]
 
 
+Crew = [
+    {
+        'member_id': 'CM021',
+        'name': 'Lisa Garcia',
+        'rank': 'captain',
+        'age': 36,
+        'specialization': 'Medical Officer',
+        'years_experience': 2,
+        'is_active': True
+    }
+]
+
+
 class Rank(Enum):
     CADET = "cadet"
     OFFICIER = "officer"
@@ -264,6 +277,15 @@ def main() -> None:
     try:
         mission1 = SpaceMission(**SPACE_MISSIONS[2])
         print_infos(mission1)
+    except (ValidationError, ValueError) as e:
+        print("Expected validation error:")
+        print(e.errors()[0]['msg'])
+        print()
+
+    print("============== Bonus ================")
+    try:
+        crew = CrewMenber(**Crew[0])
+        print(crew.name)
     except (ValidationError, ValueError) as e:
         print("Expected validation error:")
         print(e.errors()[0]['msg'])
